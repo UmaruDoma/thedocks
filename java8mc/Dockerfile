@@ -7,9 +7,13 @@
 #######################################################
 FROM java8
 
+USER mint
+RUN mkdir /home/mint/mcservers
+
 USER root
 WORKDIR /root
-RUN mkdir /root/mcservers
+
+#RUN mkdir /root/mcservers
 RUN mkdir /root/tmpdata
 
 COPY ./startscript.sh /root

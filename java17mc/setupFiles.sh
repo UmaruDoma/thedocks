@@ -4,9 +4,11 @@
 #
 # (c) 2023 cndrbrbr
 #######################################################
-wget http://codefield.de/mcmine/mcserversC.zip -O /root/tmpdata/mcserversC.zip
-
-unzip /root/tmpdata/mcserversC.zip /root/mcservers
+cd /root/tmpdata
+wget http://codefield.de/mcmine/mcserversC.zip
+cd /root/mcservers
+unzip /root/tmpdata/mcserversC.zip
+sleep 5
 rm /root/tmpdata/mcserversC.zip
 #RUN sleep 5
 

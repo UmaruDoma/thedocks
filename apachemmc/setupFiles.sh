@@ -6,8 +6,6 @@
 # (c) 2023 cndrbrbr
 #######################################################
 
-cp /root/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
-
 cd /root/tmpdata
 wget http://codefield.de/mcmine/sites-available.zip
 wget http://codefield.de/mcmine/webs.zip
