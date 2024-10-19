@@ -1,0 +1,97 @@
+#######################################################
+# Run Evironment for Meckminecraft Server 
+# docker build -t java17mc .
+# Start with docker-compose
+# 
+# docker compose up -d
+# (c) 2022 cndrbrbr
+# 05.01.2023 Update Migration meckminecraft 2023 (cndrbrbr)
+#############################################################
+version: "3.3"   
+services:
+  java8:
+    image: java8
+    build:
+        dockerfile: Dockerfile
+        context: ../java8
+  java8mc:
+    image: java8mc
+    depends_on:
+     - java8
+    build:
+        dockerfile: Dockerfile
+        context: ../java8mc
+    volumes: 
+      - mcj8_data:/root/mcservers
+      - bac8_data:/root/bac
+      - buildspimc8_data:/root/updates
+    ports:
+      - "25580:25580"
+      - "25581:25581"
+      - "8124:8124"
+  java17:
+    image: java17
+    build:
+        dockerfile: Dockerfile
+        context: ../java17
+  java17mc:
+    image: java17mc
+    build:
+        dockerfile: Dockerfile
+        context: ../java17mc
+    depends_on:
+      - java17
+    volumes:
+      - web_data:/var/www 
+      - mcjC_data:/root/mcservers
+      - bacC_data:/root/bac
+      - buildspimcC_data:/root/updates
+    ports:
+      - "25565:25565"
+      - "25566:25566"
+      - "25567:25567"
+      - "8123:8123"
+  build17mc:
+    depends_on:
+      - java17mc
+    image: build17mc
+    build:
+      dockerfile: Dockerfile
+      context: ../build17mc
+    volumes: 
+      - buildspimcC_data:/home/mint/updates    
+  build8mc:
+    image: build8mc
+    depends_on:
+      - java8mc
+    build:
+      dockerfile: Dockerfile
+      context: ../build8mc
+    volumes: 
+      - buildspimc8_data:/root/updates    
+  webdb:
+    image: apachemmc
+    build:
+      dockerfile: Dockerfile
+      context: ../apachemmc
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - web_data:/var/www
+      - mcj8_data:/root/mcservers8
+      - mcjC_data:/root/mcserversC
+      - db_data:/var/lib/mysql
+    tty: true
+    stdin_open: true
+    entrypoint: "bin/bash"
+
+volumes:
+  db_data:
+  web_data:
+  mcj8_data:
+  mcjC_data:
+  buildspimc8_data:
+  buildspimcC_data:
+  bac8_data:
+  bacC_data:
