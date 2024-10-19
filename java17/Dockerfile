@@ -20,17 +20,8 @@ RUN apt-get update -y \
     && apt-get -y upgrade \
     && apt-get -y install curl \
     && apt-get -y install screen htop\
-    && apt-get -y install mc iputils-ping nano bash
-
-#RUN echo "deb http://ftp.de.debian.org/debian trixie main" >> /etc/apt/sources.list \
-#    && apt-get update \
-#    && apt-get -y install openjdk-21-jre-headless
-
-RUN echo "deb http://ftp.de.debian.org/debian sid main" >> /etc/apt/sources.list \
-    && apt-get update \
-    && apt-get -y install openjdk-22-jre
-
-#    && apt-get -y install openjdk-21-jre-headless
+    && apt-get -y install mc iputils-ping nano bash\
+    && apt-get -y install openjdk-21-jdk
 #   && apt-get -y install openjdk-17-jre-headless 
 
 #https://packages.debian.org/sid/amd64/openjdk-22-jre-headless/download

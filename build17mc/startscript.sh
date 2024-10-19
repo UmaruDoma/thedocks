@@ -8,6 +8,5 @@
 #######################################################
 wget https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar -O BuildTools.jar
 sleep 5
-java -jar BuildTools.jar --rev 1.20.4 
+java -jar BuildTools.jar --rev latest 
 cp /root/spigot*.jar /root/updates/
-sleep infinity 
