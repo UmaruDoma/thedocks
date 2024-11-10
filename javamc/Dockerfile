@@ -3,9 +3,10 @@
 # docker build -t java17mc .
 # Start with docker-compose
 #
-# (c) 2022 cndrbrbr
+# (c) 2022 create cndrbrbr
+#     2024 add java22 cndrbrbr
 #######################################################
-FROM java17
+FROM java22
 USER root
 RUN apt-get update --fix-missing -y
 RUN apt-get -y upgrade 

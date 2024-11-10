@@ -11,9 +11,10 @@
 #   build17mc:latest
 # docker attach build17mcR
 # docker exec -ti build17mcR sh
-# (c) 2022 cndrbrbr
+# (c) 2022 initial build cndrbrbr
+#     2024 add java 22 cndrbrbr
 #######################################################
-FROM java17
+FROM java22
 USER root
 RUN apt-get update -y \
     && apt-get -y upgrade \

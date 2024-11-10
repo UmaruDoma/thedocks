@@ -29,18 +29,18 @@ services:
       - "25580:25580"
       - "25581:25581"
       - "8124:8124"
-  java17:
-    image: java17
+  java22:
+    image: java22
     build:
-      context: ../java17
+      context: ../java22
       dockerfile: Dockerfile
-  java17mc:
-    image: java17mc
+  javamc:
+    image: javamc
     build:
-      context: ../java17mc
+      context: ../javamc
       dockerfile: Dockerfile
     depends_on:
-      - java17
+      - java22
     volumes:
       - web_data:/var/www 
       - mcjC_data:/root/mcservers
@@ -51,12 +51,12 @@ services:
       - "25566:25566"
       - "25567:25567"
       - "8123:8123"
-  build17mc:
+  buildmc:
     depends_on:
-      - java17mc
-    image: build17mc
+      - javamc
+    image: buildmc
     build:
-      context: ../build17mc
+      context: ../buildmc
       dockerfile: Dockerfile
     volumes: 
       - buildspimcC_data:/root/updates    
