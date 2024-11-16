@@ -13,7 +13,7 @@ USER root
 ARG USER=mint
 ARG UID=1000
 ARG GID=1000
-ARG PW=L3g0B33
+ARG PW=${MINT_PW}
 
 RUN apt-get update -y \
     && apt-get -y install apt-utils iputils-ping wget\
