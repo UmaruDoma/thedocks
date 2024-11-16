@@ -4,6 +4,7 @@
 # Start with docker-compose
 #
 # (c) 2022 cndrbrbr
+#     2024 cndrbrbr change IP loopback
 #######################################################
 FROM debian
 
@@ -18,6 +19,12 @@ RUN mkdir /tmp/setupmmc
 COPY ./databases.tgz /tmp/setupmmc/
 COPY ./startscript.sh /tmp/setupmmc/
 # /etc/mysql/mariadb.conf.d/50-server.cnf  127.0.0.1 -> 0.0.0.0
+SEARCH_STRING="127.0.0.1"
+REPLACE_STRING="0.0.0.0"
+FILE = "/etc/mysql/mariadb.conf.d/50-server.cnf"
+# Use sed to replace the search string with the replace string
+sed -i.bak "s/${SEARCH_STRING}/${REPLACE_STRING}/g" "$FILE"
+
 RUN chmod u+x /tmp/setupmmc/startscript.sh
 
 ENTRYPOINT ["/bin/bash", "/tmp/setupmmc/startscript.sh"]

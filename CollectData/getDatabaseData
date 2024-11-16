@@ -1,0 +1,7 @@
+#!/bin/bash
+mkdir dbdata
+cd dbdata
+mysqldump  -uroot -p $DB_PW_mysql mysql > mysql.sql
+mysqldump --add-drop-table -h localhost -u kagwpuser -p $DB_PW_wp_kag wp_kag > wp_kag.sql
+mysqldump --add-drop-table -h localhost -u meckwpuser -p $DB_PW_wp_meck wp_meck > wp_meck.sql
+mysqldump --add-drop-table -h localhost -u mcuseradmin -p $DB_PW_usermanager usermanager > usermanager.sql

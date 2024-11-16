@@ -1,0 +1,5 @@
+#!/bin/bash
+mkdir apache_sites_available
+cd apache_sites_availab
+cp  /etc/apache2/sites-available .
+tar cvfz  sites-available.tgz sites-available
