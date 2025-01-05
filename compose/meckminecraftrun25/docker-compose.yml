@@ -22,25 +22,23 @@ services:
         dockerfile: Dockerfile
         context: ../java8mc
     volumes: 
-      - mcj8_data:/root/mcservers
+      - mcj8_data:/home/mint/mcservers
       - bac8_data:/root/bac
       - buildspimc8_data:/root/updates
     ports:
       - "25580:25580"
-      - "25581:25581"
-      - "8124:8124"
-  java17:
-    image: java17
+  java22:
+    image: java22
     build:
-        dockerfile: Dockerfile
-        context: ../java17
-  java17mc:
-    image: java17mc
+      context: ../java22
+      dockerfile: Dockerfile
+  javamc:
+    image: javamc
     build:
-        dockerfile: Dockerfile
-        context: ../java17mc
+      context: ../javamc
+      dockerfile: Dockerfile
     depends_on:
-      - java17
+      - java22
     volumes:
       - web_data:/var/www 
       - mcjC_data:/root/mcservers
@@ -48,43 +46,24 @@ services:
       - buildspimcC_data:/root/updates
     ports:
       - "25565:25565"
-      - "25566:25566"
-      - "25567:25567"
-      - "8123:8123"
-  build17mc:
-    depends_on:
-      - java17mc
-    image: build17mc
-    build:
-      dockerfile: Dockerfile
-      context: ../build17mc
-    volumes: 
-      - buildspimcC_data:/home/mint/updates    
-  build8mc:
-    image: build8mc
-    depends_on:
-      - java8mc
-    build:
-      dockerfile: Dockerfile
-      context: ../build8mc
-    volumes: 
-      - buildspimc8_data:/root/updates    
   webdb:
     image: apachemmc
     build:
-      dockerfile: Dockerfile
       context: ../apachemmc
+      dockerfile: Dockerfile
     restart: always
     ports:
       - "80:80"
+      - "3306:3306"
+
     volumes:
       - web_data:/var/www
-      - mcj8_data:/root/mcservers8
-      - mcjC_data:/root/mcserversC
+      - mcj8_data:/home/mint/mcservers8
+      - mcjC_data:/home/mint/mcserversC
       - db_data:/var/lib/mysql
     tty: true
     stdin_open: true
-    entrypoint: "bin/bash"
+    entrypoint: "/bin/bash"
 
 volumes:
   db_data:

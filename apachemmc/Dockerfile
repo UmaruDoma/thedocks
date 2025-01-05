@@ -41,10 +41,10 @@ RUN mkdir /home/mint/mcservers8
 RUN mkdir /home/mint/mcserversC
 
 COPY ./startscript.sh /root
-COPY ./setupfiles.sh /root
+#COPY ./setupfiles.sh /root
 COPY ./startservices.sh /root
 RUN chmod ugo+x /root/startscript.sh
-RUN chmod ugo+x /root/setupfiles.sh
+#RUN chmod ugo+x /root/setupfiles.sh
 RUN chmod ugo+x /root/startservices.sh
 
 ENTRYPOINT ["/bin/bash", "/root/startscript.sh"]
