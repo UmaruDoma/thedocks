@@ -1,3 +1,5 @@
 # Compile class file
 *.zip
+*.env
+.env
 spigot*.jar

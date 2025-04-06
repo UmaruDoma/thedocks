@@ -40,8 +40,9 @@ RUN groupadd -g ${GID} ${GROUP} \
     && chown ${USER}:${GROUP} . -R \
     && chown ${USER}:${GROUP} ${WORLD_DIR} -R \
     && chown ${USER}:${GROUP} ${PLUGIN_DIR} -R
-#USER ${UID}:${GID}
+USER ${UID}:${GID}
 
+COPY minecraft.jar .
 COPY docker-entrypoint.sh .
 RUN chmod +x ./docker-entrypoint.sh
 
