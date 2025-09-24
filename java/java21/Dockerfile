@@ -2,7 +2,7 @@
 # Run Evironment for java21
 # docker build -t java21 .
 # docker run --rm java21
-# (c) 2022 cndrbrbr
+# (c) 2025 cndrbrbr
 #######################################################
 FROM debian:12
 

@@ -2,7 +2,7 @@
 # Run Evironment for java22
 # docker build -t java22 .
 # docker run --rm java22
-# (c) 2022 cndrbrbr
+# (c) 2025 cndrbrbr
 #######################################################
 FROM debian:12.12
 
