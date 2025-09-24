@@ -2,5 +2,6 @@
 *.zip
 *.env
 .env
+*.jar
 spigot*.jar
 output/
