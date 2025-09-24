@@ -1,43 +1,34 @@
 #######################################################
 # Run Evironment for java8
 # docker build -t java8 .
+# docker run java8
+#  OpenJDK Runtime Environment (Temurin)(build 1.8.0_462-b08)
+#  OpenJDK 64-Bit Server VM (Temurin)(build 25.462-b08, mixed mode)
+#
 # Start with docker-compose
+# NAME="Debian GNU/Linux" VERSION="12 (bookworm)"
 #
 # (c) 2022 cndrbrbr
 #######################################################
-FROM debian
+FROM debian:12
 
-# === ARGS ===
+# Grundpakete installieren
+RUN apt-get update && apt-get install -y \
+    wget \
+    gnupg \
+    apt-transport-https \
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
 
-ARG USER=mint
-ARG GROUP=mint
-ARG UID=1000
-ARG GID=1000
-ARG PW=${MINT_PW}
+# Adoptium Repo hinzufügen
+RUN wget -O- https://packages.adoptium.net/artifactory/api/gpg/key/public \
+    | gpg --dearmor \
+    > /usr/share/keyrings/adoptium.gpg
 
-# === INST ===
-WORKDIR /
-RUN apt-get -y update \
-    && apt-get -y install software-properties-common 
-RUN apt-add-repository 'deb http://security.debian.org/debian-security stretch/updates main'
-RUN apt-get -y update \
-    && apt-get -y install apt-utils iputils-ping wget \
-    && apt-get -y upgrade bash \
-    && apt-get -y install screen \
-    && apt-get -y install mc nano htop\
-    && apt-get -y update 
-    
-RUN mkdir -p /etc/apt/keyrings 
-RUN wget -O - https://packages.adoptium.net/artifactory/api/gpg/key/public | tee /etc/apt/keyrings/adoptium.asc 
-RUN echo "deb [signed-by=/etc/apt/keyrings/adoptium.asc] https://packages.adoptium.net/artifactory/deb $(awk -F= '/^VERSION_CODENAME/{print$2}' /etc/os-release) main" | tee /etc/apt/sources.list.d/adoptium.list 
-RUN apt-get -y update 
-RUN apt-get -y install temurin-8-jdk
+RUN echo "deb [signed-by=/usr/share/keyrings/adoptium.gpg] https://packages.adoptium.net/artifactory/deb bookworm main" \
+    > /etc/apt/sources.list.d/adoptium.list
 
-# === USER === 
-RUN useradd -m ${USER} --uid=${UID} && echo "${USER}:${PW}" | \
-    chpasswd &&\
-    install -d -m 0755 -o ${USER} -g ${GROUP} /home/${USER}
-RUN chown ${USER}:${GROUP} /home/${USER}
-RUN chmod -R ugo+r /home/${USER}
+# Java 8 installieren
+RUN apt-get update && apt-get install -y temurin-8-jdk && rm -rf /var/lib/apt/lists/*
 
-CMD ["/bin/bash"]
+CMD ["java", "-version"]

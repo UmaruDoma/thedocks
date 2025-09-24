@@ -1,19 +1,14 @@
 #######################################################
 # Create Minecraft Server File
-# docker stop  build17mcR
-# docker rm  build17mcR
-# docker rmi  build17mc
-# docker build -t build17mc .
-# docker run -d \
-#   -it \
-#   --name build17mcR \
-#   -v /user/home/mint/mcsrvVersions:/user/home/mint/buildspigot \
-#   build17mc:latest
-# docker attach build17mcR
-# docker exec -ti build17mcR sh
+# docker stop  buildCmc
+# docker rm  buildCmc
+# docker rmi  buildCmc
+# docker build -t buildCmc .
+# docker attach buildCmc
+# docker exec -ti buildCmc sh
 # (c) 2022 cndrbrbr
 #######################################################
-FROM java17
+FROM java17# docker build -t buildCmc .
 USER root
 RUN apt-get update -y \
     && apt-get -y upgrade \

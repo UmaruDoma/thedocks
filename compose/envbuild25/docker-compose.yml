@@ -1,0 +1,44 @@
+#######################################################
+# Run Evironment for Meckminecraft Server 
+# docker build -t java17mc .
+# Start with docker-compose
+# 
+# docker compose up -d
+# (c) 2022 cndrbrbr
+# 05.01.2023 Update Migration meckminecraft 2023 (cndrbrbr)
+# 21.09.2025 Update current Version pre k8s still compose
+#            Just build the two Versions and stop
+#############################################################
+version: "3.3"   
+services:
+  java8:
+    image: java8
+    build:
+        dockerfile: Dockerfile
+        context: ../java/java8
+  java22:
+    image: java22
+    build:
+      context: ../java22
+      dockerfile: Dockerfile
+  buildmc:
+    depends_on:
+      - java22
+    image: buildmc
+    build:
+      context: ../buildmc
+      dockerfile: Dockerfile
+    volumes: 
+      - buildspigot_data:/root/updates    
+  build8mc:
+    image: build8mc
+    depends_on:
+      - java8
+    build:
+      context: ../build8mc
+      dockerfile: Dockerfile
+    volumes: 
+      - buildspigot_data:/root/updates    
+volumes:
+  buildspigot_data:
+
