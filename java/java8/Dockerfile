@@ -11,7 +11,7 @@
 # (c) 2022 cndrbrbr
 #######################################################
 FROM debian:12
-
+ 
 # Grundpakete installieren
 RUN apt-get update && apt-get install -y \
     wget \

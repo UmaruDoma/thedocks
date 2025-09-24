@@ -8,7 +8,7 @@
 # docker exec -ti buildCmc sh
 # (c) 2022 cndrbrbr
 #######################################################
-FROM java17# docker build -t buildCmc .
+FROM java17
 USER root
 RUN apt-get update -y \
     && apt-get -y upgrade \
