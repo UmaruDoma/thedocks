@@ -2,6 +2,9 @@
 # Run Evironment for Minecraft Server Files
 # docker build -t java17mc .
 # Start with docker-compose
+# https://www.spigotmc.org/wiki/start-up-parameters/
+#
+#
 #
 # (c) 2022 cndrbrbr
 #######################################################
@@ -15,18 +18,13 @@ WORKDIR /root
 RUN mkdir /root/mcservers
 RUN mkdir /root/bac
 RUN mkdir /root/tmpdata
-RUN mkdir /root/tmpdata/plugins
-RUN mkdir /root/tmpdata/mapdata
-RUN mkdir /root/tmpdata/config
 
 COPY ./startscript.sh /root
 COPY ./setupfiles.sh /root
 COPY ./startservices.sh /root
 COPY ./spigot-*.jar /root/tmpdata
-# jars
-COPY ./plugins/*  /root/tmpdata/plugins
 # zips
-COPY ./mapdata/*  /root/tmpdata/mapdata    
+#COPY ./serverzip/*  /root/tmpdata/    
 
 RUN chmod u+x /root/startscript.sh
 RUN chmod u+x /root/setupfiles.sh

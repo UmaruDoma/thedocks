@@ -19,13 +19,13 @@ ARG PW=L3g0B33
 USER root
 WORKDIR /root
 RUN apt-get -y update 
-RUN apt -y install apt-utils iputils-ping
+RUN apt-get -y install apt-utils iputils-ping
 RUN apt-get -y upgrade 
-RUN apt -y install mc nano bash wget screen htop\
-    && apt-get -y install software-properties-common \
-    && apt-get -y install apache2 apache2-utils  \
-    && apt-get -y install mariadb-server  \
-    && apt-get -y install php libapache2-mod-php php-pear php-mysql nodejs
+RUN apt-get -y install mc nano bash wget screen htop
+#RUN apt-get -y install software-properties-common 
+RUN apt-get -y install apache2 apache2-utils  
+RUN apt-get -y install mariadb-server  
+RUN apt-get -y install php libapache2-mod-php php-pear php-mysql nodejs
 
 # === USER === 
 RUN useradd -m ${USER} --uid=${UID} && echo "${USER}:${PW}" | \

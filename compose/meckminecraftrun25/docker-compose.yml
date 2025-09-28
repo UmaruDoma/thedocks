@@ -6,21 +6,22 @@
 # docker compose up -d
 # (c) 2022 cndrbrbr
 # 05.01.2023 Update Migration meckminecraft 2023 (cndrbrbr)
+# 28.09.2025 Update rebuild meckminecraft 2025 (cndrbrbr)
 #############################################################
-version: "3.3"   
+#version: "3.3"   
 services:
   java8:
     image: java8
     build:
         dockerfile: Dockerfile
-        context: ../java8
+        context: ../../java/java8
   java8mc:
     image: java8mc
     depends_on:
      - java8
     build:
         dockerfile: Dockerfile
-        context: ../java8mc
+        context: ../../minecraft/java8mc
     volumes: 
       - mcj8_data:/home/mint/mcservers
       - bac8_data:/root/bac
@@ -30,12 +31,12 @@ services:
   java22:
     image: java22
     build:
-      context: ../java22
+      context: ../../java/java22
       dockerfile: Dockerfile
-  javamc:
-    image: javamc
+  java22mc:
+    image: java22mc
     build:
-      context: ../javamc
+      context: ../../minecraft/java22mc
       dockerfile: Dockerfile
     depends_on:
       - java22
@@ -49,13 +50,12 @@ services:
   webdb:
     image: apachemmc
     build:
-      context: ../apachemmc
+      context: ../../web/apachemmc
       dockerfile: Dockerfile
     restart: always
     ports:
       - "80:80"
       - "3306:3306"
-
     volumes:
       - web_data:/var/www
       - mcj8_data:/home/mint/mcservers8

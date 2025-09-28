@@ -7,8 +7,6 @@
 #######################################################
 FROM java8
 
-USER mint
-RUN mkdir /home/mint/mcservers
 
 USER root
 WORKDIR /root
